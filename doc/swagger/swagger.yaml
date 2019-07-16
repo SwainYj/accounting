@@ -1,0 +1,184 @@
+swagger: "2.0"
+info:
+    title: iermu api / doc
+    version: "1.0"
+host: 123.57.4.235:8081
+basePath: /
+schemes:
+-   http
+paths:
+    /oauth/2.0/authorize:
+        get:
+            tags:
+            -   oauth2
+            -   application/json
+            parameters:
+            -   in: query
+                name: client_id
+                description: 应用的 API Key
+                required: true
+                type: string
+                default: "2222222222"
+            -   in: query
+                name: response_type
+                description: 固定为“code”
+                required: true
+                type: string
+                default: "code"
+            -   in: query
+                name: redirect_uri
+                description: 授权后回调 URI,需与应用注册时授权回调地址匹配
+                required: true
+                type: string
+                default: "http://127.0.0.1/"
+            -   in: query
+                name: scope
+                description: 以空格分隔的权限列表,若不传递此参数,代表请求用户的 basic 默认权限
+                required: false
+                type: string
+                default: "basic"
+            -   in: query
+                name: state
+                description: 用于保持请求和回调的状态,授权服务器在回调时(重 定向用户浏览器到“redirect_uri”时),会在 Query Parameter 中原样回传该参数。OAuth2.0 标准协议建议, 利用 state 参数来防止 CSRF 攻击。
+                required: false
+                type: string
+                default: ""
+            -   in: query
+                name: display
+                description: 登录和授权页面的展现样式,默认为“page”
+                required: false
+                type: string
+                default: "mobile"
+            responses:
+                200:
+                    description: 显示授权页面
+                default:
+                    description: 显示相关错误  
+    /oauth/2.0/token:
+        post:
+            tags:
+            -   oauth2
+            -   application/json
+            parameters:
+            -   in: formData
+                name: grant_type
+                description: 固定为“authorization_code”
+                required: true
+                type: string
+            -   in: formData
+                name: code
+                description: 通过上面第一步所获得的 Authorization Code
+                required: true
+                type: string
+                default: ""
+            -   in: formData
+                name: client_id
+                description: 应用的 API Key
+                required: true
+                type: string
+                default: "2222222222"
+            -   in: formData
+                name: redirect_uri
+                description: 该值必须与获取 Authorization Code 时传递的 “redirect_uri”保持一致
+                required: true
+                type: string
+                default: "http://127.0.0.1/"
+            responses:
+                200:
+                    description: 返回Token信息
+                default:
+                    description: 返回错误信息
+    /rest/2.0/pcs/device#register:
+        post:
+            tags:
+            -   device
+            -   application/json
+            parameters:
+            -   in: formData
+                name: method
+                description: 固定为“register”
+                required: true
+                type: string
+                default: "register"
+            -   in: formData
+                name: deviceid
+                description: 设备ID
+                required: true
+                type: string
+                default: ""
+            -   in: formData
+                name: device_type
+                description: 设备类型，默认为1
+                required: true
+                type: string
+                default: "1"
+            -   in: formData
+                name: desc
+                description: 设备名
+                required: true
+                type: string
+                default: "我的摄像头"
+            -   in: formData
+                name: access_token
+                description: access token
+                required: true
+                type: string
+                default: ""
+            responses:
+                200:
+                    description: 返回设备信息
+                default:
+                    description: 返回错误信息
+    /rest/2.0/pcs/device#list:
+        post:
+            tags:
+            -   device
+            -   application/json
+            parameters:
+            -   in: formData
+                name: method
+                description: 固定为“list”
+                required: true
+                type: string
+                default: "list"
+            -   in: formData
+                name: device_type
+                description: 设备类型，默认为1
+                required: false
+                type: string
+                default: "1"
+            -   in: formData
+                name: data_type
+                description: 数据类型，“all”返回全部
+                required: false
+                type: string
+                default: "all"
+            -   in: formData
+                name: list_type
+                description: 列表类型，“all”返回全部，“page”分页返回
+                required: false
+                type: string
+                default: "all"
+            -   in: formData
+                name: page
+                description: 页数，默认为1，list_type为page时有效
+                required: false
+                type: integer
+                default: ""
+            -   in: formData
+                name: count
+                description: 每页数据条数，默认为10，list_type为page时有效
+                required: false
+                type: integer
+                default: ""
+            -   in: formData
+                name: access_token
+                description: access token
+                required: true
+                type: string
+                default: ""
+            responses:
+                200:
+                    description: 返回设备信息
+                default:
+                    escription: 返回错误信息
