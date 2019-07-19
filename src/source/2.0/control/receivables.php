@@ -94,7 +94,7 @@ class receivablescontrol extends base {
     }
 
     //导出
-    function export(){
+    function onexport(){
     	$this->init_input();
         $param['com_a'] = $this->input("com_a");
         $param['com_b_name'] = $this->input("com_b_name");
@@ -105,7 +105,7 @@ class receivablescontrol extends base {
         $param['invoice_num'] = $this->input("invoice_num");
         $param['settlement_year'] = $this->input("settlement_year");
         $param['settlement_month'] = $this->input("settlement_month");
-        $result = $_ENV['receivables']->export($param, $list_type, $page, $count);
+        $result = $_ENV['receivables']->export($param);
         return $result;
     }
 

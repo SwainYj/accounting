@@ -1,0 +1,223 @@
+.tree-node-selected {
+	background: #b1d7eab5;
+}
+
+body {
+    background: rgb(255,255,255);
+    color: rgb(0,0,0);
+    font-size: 0.86em;
+    line-height: 1.4;
+    font-family: roboto,arial,tahoma,verdana,helvetica;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+div {
+    display: block;
+}
+
+
+div.tmenu{
+    height: 48px;
+    width: 100%;
+    background: rgb(60,70,100);
+}
+
+/*div.tmenudiv {
+    position: relative;
+    display: block;
+    white-space: nowrap;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    font-size: 13px;
+    font-weight: normal;
+    color: #000000;
+    text-decoration: none;
+}*/
+
+ul.tmenu {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    list-style: none;
+    display: table;
+    font-weight: normal;
+    color: #000000;
+    text-decoration: none;
+}
+
+li.tmenusel, li.tmenu:hover {
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.5) 0%, rgba(250,250,250,0) 100%);
+}
+li.tmenusel {
+    list-style: none;
+    min-width: 66px;
+    text-align: center;
+    vertical-align: bottom;
+    float: left;
+    position: relative;
+    display: block;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-weight: normal;
+}
+li.tmenuend{
+    list-style: none;
+    min-width: 66px;
+    text-align: center;
+    vertical-align: bottom;
+    float: right;
+    position: relative;
+    display: block;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-weight: normal;
+}
+div.tmenucenter {
+    padding-left: 0px;
+    padding-right: 3px;
+    padding-top: 2px;
+    height: 48px;
+    width: 100%;
+}
+
+div.mainmenu.home {
+    background-image: url(/view/front/images/home_over.png);
+    background-position-x: center;
+}
+div.mainmenu {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 26px;
+    margin-left: 0px;
+    min-width: 40px;
+}
+.topmenuimage {
+    background-size: 22px auto;
+    top: 2px;
+}
+.tmenuimage {
+    padding: 0 0 0 0 !important;
+    margin: 0 0px 0 0 !important;
+}
+
+
+a.tmenusel:link, a.tmenusel:visited, a.tmenusel:hover, a.tmenusel:active {
+    font-weight: normal;
+    padding: 0px 4px 0px 4px;
+    margin: 0px 0px 0px 0px;
+    white-space: nowrap;
+    color: #FFFFFF;
+    text-decoration: none !important;
+}
+.mainmenuaspan {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+
+/**内容**/
+#id-container {
+    display: table;
+    table-layout: fixed;
+}
+.side-nav {
+    display: table-cell;
+    border-right: 1px solid #d0d0d0;
+    box-shadow: 3px 0 6px -2px #eee;
+    background: rgb(248,248,248);
+}
+#id-right, #id-left {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: table-cell;
+    float: none;
+    vertical-align: top;
+}
+div.vmenu, td.vmenu {
+    margin-right: 2px;
+    position: relative;
+    float: left;
+    padding: 0px;
+    padding-bottom: 0px;
+    padding-top: 1px;
+    width: 190px;
+}
+
+div.blockvmenuimpair, div.blockvmenubookmarks {
+    font-family: roboto,arial,tahoma,verdana,helvetica;
+    color: #000000;
+    text-align: left;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 1px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 0 0 0 2px;
+    background: rgb(248,248,248);
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #BBB;
+
+    border-top: none !important;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+div.menu_titre {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 188px;
+    margin-top: 4px;
+    margin-bottom: 3px;
+}
+
+a.vmenu:link {
+    white-space: nowrap;
+    font-family: roboto,arial,tahoma,verdana,helvetica;
+    text-align: left;
+    font-weight: bold;
+    color: #000000;
+    text-decoration:none;
+}
+.paddingright {
+    padding-right: 4px;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+        width: 1.28571429em;
+    text-align: center;
+}
+
+#id-right, #id-left {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: table-cell;
+    float: none;
+    vertical-align: top;
+}
+#id-right {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: rgb(255,255,255);
+}
+
+.clear{
+    clear:both;
+    height: 1px;
+}
+.layui-inline{
+    margin-bottom: 10px;
+}
+

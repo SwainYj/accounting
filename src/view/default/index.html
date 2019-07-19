@@ -1,0 +1,222 @@
+<!doctype html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>miss 杨的系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="../front/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="any" mask="" href="../front/images/favicon.ico">
+    <link href="../front/css/common.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../front/common/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../front/common/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../front/common/layui/css/layui.css">
+    <script type="text/javascript" src="../front/js/config.js"></script>
+    <script type="text/javascript" src="../front/js/common.js"></script>
+    <script type="text/javascript" src="../front/js/invoice.js"></script>
+</head>
+
+<body>
+    <div class="main">
+
+        <div id="tmenu_tip" class="tmenu">
+            <ul class="tmenu">
+                <li class="tmenusel" id="mainmenutd_home">
+                    <div class="tmenucenter" id = "homeimage">
+                        <div class="mainmenu home topmenuimage"><span class="mainmenu tmenuimage" id="mainmenuspan_home"></span></div>
+                        <a class="tmenusel" id="mainmenua_home" href="#">
+                        <span class="mainmenuaspan">主页</span></a></div>
+                </li>
+
+                <li class="tmenuend" id="mainmenutd_"><div class="tmenucenter"></div></li>
+            </ul>
+        </div>
+
+        <div style="clear: both;"></div>
+
+
+<!----- 内容 ----->
+        <div id="id-container" class="id-container">
+        <!-- Begin side-nav id-left -->
+            <div class="side-nav">
+                <div id="id-left">
+                <!-- Begin left menu -->
+                    <div class="vmenu">
+                        <div class="blockvmenu blockvmenuimpair blockvmenulast">
+                            <div class="menu_titre">
+                                <a class="vmenu" href="#"><i class="fa fa-users fa-fw paddingright"></i>开票明细</a>
+                            </div>
+                            <div class="menu_top"></div>
+                            <div class="menu_end"></div>
+                        </div>
+                    </div>
+
+                    <div class="vmenu">
+                        <div class="blockvmenu blockvmenuimpair blockvmenulast">
+                            <div class="menu_titre">
+                                <a class="vmenu" href="predict.html"><i class="fa fa-users fa-fw paddingright"></i>预估明细</a>
+                            </div>
+                            <div class="menu_top"></div>
+                            <div class="menu_end"></div>
+                        </div>
+                    </div>
+
+                    <div class="vmenu">
+                        <div class="blockvmenu blockvmenuimpair blockvmenulast">
+                            <div class="menu_titre">
+                                <a class="vmenu" href="receivables.html"><i class="fa fa-users fa-fw paddingright"></i>收款明细</a>
+                            </div>
+                            <div class="menu_top"></div>
+                            <div class="menu_end"></div>
+                        </div>
+                    </div>
+
+                    <div class="vmenu">
+                        <div class="blockvmenu blockvmenuimpair blockvmenulast">
+                            <div class="menu_titre">
+                                <a class="vmenu" href="#"><i class="fa fa-users fa-fw paddingright"></i>应收账款统计</a>
+                            </div>
+                            <div class="menu_top"></div>
+                            <div class="menu_end"></div>
+                        </div>
+                    </div>
+
+                    <div class="vmenu">
+                        <div class="blockvmenu blockvmenuimpair blockvmenulast">
+                            <div class="menu_titre">
+                                <a class="vmenu" href="#"><i class="fa fa-users fa-fw paddingright"></i>开票收款统计</a>
+                            </div>
+                            <div class="menu_top"></div>
+                            <div class="menu_end"></div>
+                        </div>
+                    </div>
+
+                    <div class="vmenu">
+                        <div class="blockvmenu blockvmenuimpair blockvmenulast">
+                            <div class="menu_titre">
+                                <a class="vmenu" href="#"><i class="fa fa-users fa-fw paddingright"></i>应收账龄分析</a>
+                            </div>
+                            <div class="menu_top"></div>
+                            <div class="menu_end"></div>
+                        </div>
+                    </div>
+                </div><!-- End side-nav id-left -->
+            </div>
+        <!-- Begin right area -->
+            <div id="id-right">
+                <div class="layui-card-body">
+                     <button class="layui-btn frame-btn" id="vsEnter">开票明细添加</button>
+                </div>
+
+                <!----筛选条件-->
+                <form class="layui-form" action="">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">所属公司</label>
+                        <div class="layui-input-block">
+                            <select name="com_a" data-type="com"
+                                lay-filter="com_a" autocomplete="off">
+                                <option value=""></option>
+                                <option value="1">书香</option>
+                                <option value="2">古羌</option>
+                                <option value="3">丹鼎</option>
+                                <option value="4">聚点</option>
+                            </select>
+                            <div class="layui-unselect layui-form-select">
+                                <div class="layui-select-title"><input type="text" placeholder="请选择"
+                                        value="" readonly="" class="layui-input layui-unselect"
+                                        autocomplete="off"><i class="layui-edge"></i></div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd lay-value="" class="layui-select-tips">请选择</dd>
+                                    <dd lay-value="1" class="">书香</dd>
+                                    <dd lay-value="2" class="">古羌</dd>
+                                    <dd lay-value="3" class="">丹鼎</dd>
+                                    <dd lay-value="4" class="">聚点</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">收入类型</label>
+                        <div class="layui-input-block">
+                            <select name="subject_type" data-type="subject"
+                                lay-filter="subject_type" autocomplete="off">
+                                <option value=""></option>
+                                <option value="1">阅读</option>
+                                <option value="2">有声</option>
+                                <option value="3">自媒体</option>
+                                <option value="4">动漫</option>
+                            </select>
+                            <div class="layui-unselect layui-form-select">
+                                <div class="layui-select-title"><input type="text" placeholder="请选择"
+                                        value="" readonly="" class="layui-input layui-unselect"
+                                        autocomplete="off"><i class="layui-edge"></i></div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd lay-value="" class="layui-select-tips">请选择</dd>
+                                    <dd lay-value="1" class="">阅读</dd>
+                                    <dd lay-value="2" class="">有声</dd>
+                                    <dd lay-value="3" class="">自媒体</dd>
+                                    <dd lay-value="4" class="">动漫</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                  
+                  <div class="layui-inline">
+                    <label class="layui-form-label">结算年</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="settlement_year" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label">结算月</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="settlement_month" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+                  <div class="layui-inline">
+                    <label class="layui-form-label">发票号</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="invoice_num" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label">开票年</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="invoice_year" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label">开票月</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="invoice_month" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label">开票日</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="invoice_day" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+                  <div class="layui-inline">
+                    <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="formDemo">
+                      <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                    </button>
+                    <button class="layui-btn" lay-submit="" lay-filter="export">导出</button>
+                  </div>
+                </form>
+
+                <table id="invoiceTable" lay-filter="invoice"></table>
+
+
+            </div>
+        </div>
+       
+    </div>
+
+    <div id="frameTrigger" data-param="" style="display: none"></div>
+</body>

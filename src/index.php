@@ -65,9 +65,9 @@ if (!API_OPEN) {
 }
 
 require API_SOURCE_ROOT.'model/base.php';
-require API_SOURCE_ROOT.'model/admin.php';
+// require API_SOURCE_ROOT.'model/admin.php';
 
-$mods = array('bill');
+$mods = array('invoice','predict','receivables','statistics');
 
 
 if (in_array($m, $mods)) {

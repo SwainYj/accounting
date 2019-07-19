@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="shortcut icon" href="../front/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="any" mask="" href="../front/images/favicon.ico">
+    <script type="text/javascript" src="../front/js/config.js"></script>
+    <script type="text/javascript" src="../front/js/common.js"></script>
+    <link href="../front/css/common.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../front/common/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../front/common/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div id="createBanner" class="layui-card">
+                <div class="layui-card-body">
+                    新建开票明细
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <form class="layui-form" id="invoiceCreateForm" lay-filter="invoiceCreateForm">
+                        <div class="layui-container">
+                              
+                            <div class="layui-form-item">
+                              <div class="layui-inline">
+                                  <label class="layui-form-label"><span class="tip-warn">*</span>所属公司</label>
+                                  <div class="layui-input-inline">
+                                      <select name="com_a" id="com_a" lay-verify="com_aSelect"
+                                          lay-filter="com_aType" autocomplete="off">
+                                          <option value="">请选择所属公司</option>
+                                      </select>
+                                      <div class="layui-unselect layui-form-select">
+                                          <div class="layui-select-title">
+                                              <input type="text" placeholder="请选择所属公司" value="" readonly=""
+                                                  class="layui-input layui-unselect" autocomplete="off"><i
+                                                  class="layui-edge"></i>
+                                          </div>
+                                          <dl class="layui-anim layui-anim-upbit">
+                                              <dd lay-value="" class="layui-select-tips">请选择所属公司</dd>
+                                          </dl>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <div class="layui-inline">
+                                  <label class="layui-form-label"><span class="tip-warn">*</span>收入类型</label>
+                                  <div class="layui-input-inline">
+                                      <select name="subject_type" id="subject_type" lay-verify="subject_typeSelect"
+                                          lay-filter="subject_typeType" autocomplete="off">
+                                          <option value="">请选择收入类型</option>
+                                      </select>
+                                      <div class="layui-unselect layui-form-select">
+                                          <div class="layui-select-title">
+                                              <input type="text" placeholder="请选择收入类型" value="" readonly=""
+                                                  class="layui-input layui-unselect" autocomplete="off"><i
+                                                  class="layui-edge"></i>
+                                          </div>
+                                          <dl class="layui-anim layui-anim-upbit">
+                                              <dd lay-value="" class="layui-select-tips">请选择收入类型</dd>
+                                          </dl>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">单位名称</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="com_b_name" placeholder="请输入" autocomplete="off" class="layui-input" id="com_b_name">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">发票号</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="invoice_num" placeholder="请输入" autocomplete="off" class="layui-input" id="invoice_num" lay-verify="invoice_num">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">开票年</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="invoice_year" placeholder="请输入" autocomplete="off" class="layui-input" id="invoice_year">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">开票月</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="invoice_month" placeholder="请输入" autocomplete="off" class="layui-input" id="invoice_month">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">开票日</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="invoice_day" placeholder="请输入" autocomplete="off" class="layui-input" id="invoice_day">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">结算年</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="settlement_year" placeholder="请输入" autocomplete="off" class="layui-input" id="settlement_year">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">结算月</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="settlement_month" placeholder="请输入" autocomplete="off" class="layui-input" id="settlement_month">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">本月结算金额</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="amount" placeholder="请输入本月结算金额" autocomplete="off" class="layui-input" id="amount">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">预算</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="predict" placeholder="请输入预算" autocomplete="off" class="layui-input" id="predict">
+                              </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">备注</label>
+                              <div class="layui-input-inline">
+                                <input type="text" name="remark" placeholder="请输入备注" autocomplete="off" class="layui-input" id="remark">
+                              </div>
+                            </div>
+
+                            
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit="" lay-filter="createInvoice">立即提交</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../front/common/layui/layui.all.js"></script>
+    <script type="text/javascript" src="../front/js/invoice_add.js"></script>
+</body>
+
+</html>

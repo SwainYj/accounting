@@ -1,4 +1,18 @@
 COMMON = {
+	// 获取服务URL
+    filterURL: function (url) {
+        return COMMON.getRequestStamp(CONFIG.serverURL + url);
+    }
+    , getRequestStamp: function (url) {
+        var date = new Date();
+        var ss = date.getMilliseconds();
+        if (url.indexOf('?') != -1) {
+            return url + '&_stamp=' + (ss + '_' + Math.random());
+        } else {
+            return url + '?_stamp=' + (ss + '_' + Math.random());
+        }
+    },
+
 	renderSetup: function (options) {
 	    options.method = (options.method ? options.method : 'post');
 
@@ -20,5 +34,14 @@ COMMON = {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = url.substr(1).match(reg);
         if (r != null) return encodeURI(r[2]); return null;
+    },
+    jsonToQuery: function (params) {
+        var query = [];
+
+        for (var k in params) {
+            query.push(k + '=' + params[k]);
+        }
+
+        return query.join('&');
     },
 }

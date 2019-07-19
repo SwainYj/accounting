@@ -88,7 +88,7 @@ class predictcontrol extends base {
     }
 
     //导出
-    function export(){
+    function onexport(){
     	$this->init_input();
         $param['com_a'] = $this->input("com_a");
         $param['subject_type'] = $this->input("subject_type");

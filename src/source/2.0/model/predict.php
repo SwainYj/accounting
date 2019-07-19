@@ -2,24 +2,23 @@
 
 !defined('IN_API') && exit('Access Denied');
 
-class invoicemodel {
+class predictmodel {
 
     var $db;
     var $base;
 
     function __construct(&$base) {
-        $this->invoicemodel($base);
+        $this->predictmodel($base);
     }
 
-    function invoicemodel(&$base) {
+    function predictmodel(&$base) {
         $this->base = $base;
         $this->db = $base->db;
     }
 
+    function listpredict($param, $list_type, $page, $count){
 
-    function listinvoice($param, $list_type, $page, $count){
-
-        $sql = API_DBTABLEPRE."invoice WHERE del='0' ";
+        $sql = API_DBTABLEPRE."predict WHERE del='0' ";
 
         if ($param['com_a'] != NULL) {
             $sql .= ' AND com_a="'.$param['com_a'].'"';
@@ -27,26 +26,20 @@ class invoicemodel {
         if ($param['subject_type']) {
             $sql .= ' AND subject_type="'.$param['subject_type'].'"';
         }
-        if ($param['settlement_year']) {
-            $sql .= ' AND settlement_year="'.$param['settlement_year'].'"';
+        if ($param['predict_year']) {
+            $sql .= ' AND predict_year="'.$param['predict_year'].'"';
         }
-        if ($param['settlement_month']!= NULL) {
-            $sql .= ' AND settlement_month="'.$param['settlement_month'].'"';
+        if ($param['predict_month']!= NULL) {
+            $sql .= ' AND predict_month="'.$param['predict_month'].'"';
         }
-        if ($param['invoice_year']) {
-            $sql .= ' AND invoice_year="'.$param['invoice_year'].'"';
+        if ($param['charger']) {
+            $sql .= ' AND charger="'.$param['charger'].'"';
         }
-        if ($param['invoice_month']!= NULL) {
-            $sql .= ' AND invoice_month="'.$param['invoice_month'].'"';
-        }
-        if ($param['invoice_day']!= NULL) {
-            $sql .= ' AND invoice_day="'.$param['invoice_day'].'"';
-        }
-        if ($param['invoice_num']!= NULL) {
-            $sql .= ' AND invoice_num="'.$param['invoice_num'].'"';
+        if ($param['com_b_name']!= NULL) {
+            $sql .= ' AND com_b_name="'.$param['com_b_name'].'"';
         }
         // $order = "";
-        $order = " ORDER BY invoice_num,com_a,com_b_name ASC ";
+        $order = " ORDER BY com_a,subject_type,predict_month,com_b_name ASC ";
 
         $total = 0;
         if ($list_type == 'page') {
@@ -67,54 +60,50 @@ class invoicemodel {
         return $result;
     }
 
-    function saveinvoice($param){
+    function savepredict($param){
     	$time = date("Ymd",time());
     	$set = " SET update_time = '".$time."'";
-        $set.= ", invoice_num= '".$param['invoice_num']."'";
-        $set.= ", invoice_year= '".$param['invoice_year']."'";
-        $set.= ", invoice_month= '".$param['invoice_month']."'";
-        $set.= ", invoice_day= '".$param['invoice_day']."'";
-        $set.= ", settlement_year= '".$param['settlement_year']."'";
-        $set.= ", settlement_month= '".$param['settlement_month']."'";
+        $set.= ", predict_year= '".$param['predict_year']."'";
+        $set.= ", predict_month= '".$param['predict_month']."'";
         $set.= ", amount= '".$param['amount']."'";
         $set.= ", com_b_name= '".$param['com_b_name']."'";
         $set.= ", com_a= '".$param['com_a']."'";
         $set.= ", subject_type= '".$param['subject_type']."'";
-        $set.= ", predict= '".$param['predict']."'";
+        $set.= ", charger= '".$param['charger']."'";
         $set.= ", remark= '".$param['remark']."'";
 
     	if($param['id']){ 
     		//更新
-    		$this->db->query("UPDATE ".API_DBTABLEPRE."invoice ".$set." WHERE id=".$param['id']);
+    		$this->db->query("UPDATE ".API_DBTABLEPRE."predict ".$set." WHERE id=".$param['id']);
     		$id = $param['id'];
     	}else{
     		//插入
     		$set. ", create_time='".$time."'";
-    		$this->db->query("INSERT INTO ".API_DBTABLEPRE."invoice ".$set);
+    		$this->db->query("INSERT INTO ".API_DBTABLEPRE."predict ".$set);
     		$id = $this->db->insert_id();
     	}
         $res['id'] = $id;
     	return $res;
     }
 
-    function invoice_detail($id){
+    function predict_detail($id){
         if(!$id)
             return false;
 
-        $res = $this->db->fetch_first("SELECT * FROM ".API_DBTABLEPRE."invoice WHERE id = $id");
+        $res = $this->db->fetch_first("SELECT * FROM ".API_DBTABLEPRE."predict WHERE id = $id");
         $result['data'] = $res;
         return $result;
     }
 
-    function delinvoice($id){
+    function delpredict($id){
     	if(!$id)
     		return false;
-    	$this->db->query("DELETE FROM ".API_DBTABLEPRE."invoice WHERE id= $id ");
+    	$this->db->query("DELETE FROM ".API_DBTABLEPRE."predict WHERE id= $id ");
     	return true;
     }
 
     function export($param){
-        $sql = API_DBTABLEPRE."invoice WHERE del='0' ";
+        $sql = API_DBTABLEPRE."predict WHERE del='0' ";
 
         if ($param['com_a'] != NULL) {
             $sql .= ' AND com_a="'.$param['com_a'].'"';
@@ -122,46 +111,29 @@ class invoicemodel {
         if ($param['subject_type']) {
             $sql .= ' AND subject_type="'.$param['subject_type'].'"';
         }
-        if ($param['settlement_year']) {
-            $sql .= ' AND settlement_year="'.$param['settlement_year'].'"';
+        if ($param['predict_year']) {
+            $sql .= ' AND predict_year="'.$param['predict_year'].'"';
         }
-        if ($param['settlement_month']!= NULL) {
-            $sql .= ' AND settlement_month="'.$param['settlement_month'].'"';
+        if ($param['predict_month']!= NULL) {
+            $sql .= ' AND predict_month="'.$param['predict_month'].'"';
         }
-        if ($param['invoice_year']) {
-            $sql .= ' AND invoice_year="'.$param['invoice_year'].'"';
+        if ($param['charger']) {
+            $sql .= ' AND charger="'.$param['charger'].'"';
         }
-        if ($param['invoice_month']!= NULL) {
-            $sql .= ' AND invoice_month="'.$param['invoice_month'].'"';
-        }
-        if ($param['invoice_day']!= NULL) {
-            $sql .= ' AND invoice_day="'.$param['invoice_day'].'"';
-        }
-        if ($param['invoice_num']!= NULL) {
-            $sql .= ' AND invoice_num="'.$param['invoice_num'].'"';
+        if ($param['com_b_name']!= NULL) {
+            $sql .= ' AND com_b_name="'.$param['com_b_name'].'"';
         }
         // $order = "";
-        $order = " ORDER BY invoice_num,com_a,com_b_name ASC ";
+        $order = " ORDER BY com_a,subject_type,predict_month,com_b_name ASC ";
         $sql .= $order;
         $result = $this->db->fetch_all("SELECT * FROM ".$sql);
-        $result = $this->groupby($result);
-
         $this->downexcel($result);
 
     }
 
-    function groupby($result){
-        $res = array();
-        foreach ($result as $key => $value) {
-            $res[$value['invoice_num']][] = $value;
-            # code...
-        }
-        return $res;
-    }
-
     function downexcel($data){
         error_reporting(0);
-        $name = '开票明细'.date('Ymd');
+        $name = '预估明细'.date('Ymd');
         include_once API_SOURCE_ROOT.'lib/PHPExcel.php';
         $objPHPExcel = new PHPExcel();
 
@@ -174,16 +146,16 @@ class invoicemodel {
             ->setCategory("Test result file");
 
         $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A1', '开票日期')
-            ->setCellValue('D1', '发票信息')
-            ->setCellValue('K1', '其它');
+            ->setCellValue('A1', '公司信息')
+            ->setCellValue('D1', '预估日期')
+            ->setCellValue('G1', '其它');
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
         $objPHPExcel->getActiveSheet()->getStyle('D1')->getFont()->setSize(14);
-        $objPHPExcel->getActiveSheet()->getStyle('K1')->getFont()->setSize(14);
+        $objPHPExcel->getActiveSheet()->getStyle('G1')->getFont()->setSize(14);
         $objPHPExcel->getActiveSheet()->mergeCells('A1:C1');
-        $objPHPExcel->getActiveSheet()->mergeCells('D1:J1');
-        $objPHPExcel->getActiveSheet()->mergeCells('K1:O1');
-        $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray(
+        $objPHPExcel->getActiveSheet()->mergeCells('D1:F1');
+        $objPHPExcel->getActiveSheet()->mergeCells('G1:H1');
+        $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->applyFromArray(
             array(
                 'font' => array (
                     'bold' => true
@@ -203,37 +175,23 @@ class invoicemodel {
 
         $objPHPExcel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(22);
         $objPHPExcel->getDefaultStyle()->getFont()->setName('宋体');
-        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(40);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(12);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(30);
-
-        
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(30);
 
 // Add some data
         $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A2', '年')
-            ->setCellValue('B2', '月')
-            ->setCellValue('C2', '日')
-            ->setCellValue('D2', '发票号')
-            ->setCellValue('E2', '结算年份')
-            ->setCellValue('F2', '结算月份')
-            ->setCellValue('G2', '每月金额')
-            ->setCellValue('H2', '合计结算月份')
-            ->setCellValue('I2', '合计开票金额')
-            ->setCellValue('J2', '单位名称')
-            ->setCellValue('K2', '所属公司')
-            ->setCellValue('L2', '收入类型')
-            ->setCellValue('M2', '同月预估数')
-            ->setCellValue('N2', '预估差额')
-            ->setCellValue('O2', '备注');
+            ->setCellValue('A2', '所属公司')
+            ->setCellValue('B2', '收入类型')
+            ->setCellValue('C2', '单位名称')
+            ->setCellValue('D2', '年')
+            ->setCellValue('E2', '月')
+            ->setCellValue('F2', '预估金额')
+            ->setCellValue('G2', '负责人')
+            ->setCellValue('H2', '备注');
 
         //加粗居中
-        $objPHPExcel->getActiveSheet()->getStyle('A2:O2')->applyFromArray(
+        $objPHPExcel->getActiveSheet()->getStyle('A2:H2')->applyFromArray(
             array(
                 'font' => array (
                     'bold' => true
@@ -253,42 +211,22 @@ class invoicemodel {
         // $objPHPExcel->getActiveSheet()->freezePane('A1');
         if ($data){
             $n = 3;
-            foreach ($data as $k => $v){
-                $hjy = "";
-                $hja = 0;
-                $c = count($v);
-                $start = $n;
-                foreach ($v as $invoice) {
-                    $ygce = floatval($invoice['amount']) - floatval($invoice['predict']);
-                    $hja = $hja + floatval($invoice['amount']);
-                    $hjy .= $invoice['settlement_month'].", ";
-                    $objPHPExcel->setActiveSheetIndex(0)
-                    ->setCellValue('A'.$n, $invoice['invoice_year'])
-                    ->setCellValue('B'.$n, $invoice['invoice_month'])
-                    ->setCellValue('C'.$n, $invoice['invoice_day'])
-                    ->setCellValue('D'.$n, $invoice['invoice_num'])
-                    ->setCellValue('E'.$n, $invoice['settlement_year'])
-                    ->setCellValue('F'.$n, $invoice['settlement_month'])
-                    ->setCellValue('G'.$n, $invoice['amount'])
-                    ->setCellValue('J'.$n, $invoice['com_b_name'])
-                    ->setCellValue('K'.$n, $this->getcomname($invoice['com_a']))
-                    ->setCellValue('L'.$n, $this->getsubtype($invoice['subject_type']))
-                    ->setCellValue('M'.$n, $invoice['predict'])
-                    ->setCellValue('N'.$n, $ygce)
-                    ->setCellValue('O'.$n, $invoice['remark']);
-                    # code...
-                    $n++;
-                }
-                $end = $n-1;
+            foreach ($data as $k => $predict){
                 $objPHPExcel->setActiveSheetIndex(0)
-                ->setCellValue('H'.$start, $hjy)
-                ->setCellValue('I'.$start, $hja);
-                $objPHPExcel->getActiveSheet()->mergeCells("H".$start.":H".$end."");
-                $objPHPExcel->getActiveSheet()->mergeCells("I".$start.":I".$end."");
+                ->setCellValue('A'.$n, $this->getcomname($predict['com_a']))
+                ->setCellValue('B'.$n, $this->getsubtype($predict['subject_type']))
+                ->setCellValue('C'.$n, $predict['com_b_name'])
+                ->setCellValue('D'.$n, $predict['predict_year'])
+                ->setCellValue('E'.$n, $predict['predict_month'])
+                ->setCellValue('F'.$n, $predict['amount'])
+                ->setCellValue('G'.$n, $predict['charger'])
+                ->setCellValue('H'.$n, $predict['remark']);
+                # code...
+                $n++;
             }
         }
 // Rename worksheet
-        $objPHPExcel->getActiveSheet()->setTitle("开票明细");
+        $objPHPExcel->getActiveSheet()->setTitle("预估明细");
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $objPHPExcel->setActiveSheetIndex(0);
 // Redirect output to a client’s web browser (Excel5)

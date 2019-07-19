@@ -59,6 +59,7 @@ class invoicecontrol extends base {
     	$param['com_a'] = $this->input("com_a");
     	$param['subject_type'] = $this->input("subject_type");
     	$param['predict'] = $this->input("predict");
+        $param['remark'] = $this->input("remark");
     	$result = $_ENV['invoice']->saveinvoice($param);
         $result['code'] = 200;
 
@@ -93,7 +94,7 @@ class invoicecontrol extends base {
     }
 
     //导出
-    function export(){
+    function onexport(){
     	$this->init_input();
         $param['com_a'] = $this->input("com_a");
     	$param['subject_type'] = $this->input("subject_type");
@@ -103,7 +104,7 @@ class invoicecontrol extends base {
         $param['invoice_month'] = $this->input("invoice_month");
         $param['invoice_day'] = $this->input("invoice_day");
         $param['invoice_num'] = $this->input("invoice_num");
-        $result = $_ENV['invoice']->export($param, $list_type, $page, $count);
+        $result = $_ENV['invoice']->export($param);
         return $result;
     }
 
